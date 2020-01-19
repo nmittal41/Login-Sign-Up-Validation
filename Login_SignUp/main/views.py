@@ -6,6 +6,7 @@ from django.contrib.auth import login,logout,authenticate
 from django.contrib import messages
 from .forms import NewUserForm
 from .models import *
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -55,3 +56,9 @@ def logout_request(request):
 	logout(request)
 	messages.info(request,"Logged out succesfully")
 	return redirect("main:homepage")
+
+
+@login_required
+def view_profile(request):
+  args = {'user': request.user}
+  return render(request, 'main/profile.html', args)

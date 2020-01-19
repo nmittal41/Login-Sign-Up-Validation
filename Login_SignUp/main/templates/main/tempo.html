@@ -1,0 +1,26 @@
+<body>
+	{% if user.is_authenticated %}
+	<li><a href="/account">{{user.username}}</a></li>
+	<li><a href="/logout">Logout</a></li>
+	{% else %}
+	<li><a href="/register">Register</a></li>
+	<li><a href="/login">Login</a></li>
+	{% endif %}
+
+</body>
+
+
+
+
+{% extends "main/base.html" %}
+
+{% block content %}
+	<form method="POST">
+		{% csrf_token %}
+		{{form}}
+		<button type="submit">Register</button>
+	</form>
+
+	If you already have an account <a href="/login">Login</a> instead.
+
+{% endblock %}
